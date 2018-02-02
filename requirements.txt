@@ -13,7 +13,6 @@ Jinja2==2.10
 Markdown==2.6.11
 MarkupSafe==1.0
 Pillow==5.0.0
-pkg-resources==0.0.0
 Pygments==2.2.0
 pytz==2017.3
 requests==2.18.4

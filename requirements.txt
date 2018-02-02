@@ -2,9 +2,11 @@ certifi==2018.1.18
 chardet==3.0.4
 coreapi==2.3.3
 coreschema==0.0.4
+dj-database-url==0.4.2
 Django==2.0.1
 django-crispy-forms==1.7.0
 django-guardian==1.4.9
+django-heroku==0.2.0
 djangorestframework==3.7.7
 gunicorn==19.7.1
 idna==2.6
@@ -13,9 +15,12 @@ Jinja2==2.10
 Markdown==2.6.11
 MarkupSafe==1.0
 Pillow==5.0.0
+pkg-resources==0.0.0
+psycopg2==2.7.3.2
 Pygments==2.2.0
 pytz==2017.3
 requests==2.18.4
 six==1.11.0
 uritemplate==3.0.0
 urllib3==1.22
+whitenoise==3.3.1

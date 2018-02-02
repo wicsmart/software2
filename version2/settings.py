@@ -146,6 +146,8 @@ STATICFILES_DIRS = (
     os.path.join(BASE_DIR, 'static'),
 )
 
+ALLOWED_HOSTS = ['*']
+
 #Heroku settings
 
 
@@ -155,6 +157,5 @@ DATABASES['default']['CONN_MAX_AGE'] = 500
 DATABASES['default']['ENGINE'] = 'django.db.backends.sqlite3'
 
 
-ALLOWED_HOSTS['*']
 
 #django_heroku.settings(locals())

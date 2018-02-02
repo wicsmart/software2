@@ -93,12 +93,6 @@ DATABASES = {
     }
 }
 
-django_heroku.settings(locals())
-
-DATABASES['default'] = dj_database_url.config()
-DATABASES['default']['CONN_MAX_AGE'] = 500
-DATABASES['default']['ENGINE'] = 'django.db.backends.sqlite3'
-
 
 
 # Password validation
@@ -144,5 +138,23 @@ STATICFILES_DIRS = [
 
 STATIC_URL = '/static/'
 
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+
+STATICFILES_DIRS = (
+    os.path.join(BASE_DIR, 'static'),
+)
+
+#Heroku settings
+
+
+
+DATABASES['default'] = dj_database_url.config()
+DATABASES['default']['CONN_MAX_AGE'] = 500
+DATABASES['default']['ENGINE'] = 'django.db.backends.sqlite3'
+
+
+ALLOWED_HOSTS['*']
+
+#django_heroku.settings(locals())

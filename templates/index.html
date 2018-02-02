@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+{% load static %}
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width">
+    <meta name="description" content="Monitoramento e Controle remoto de sua estufa">
+	  <meta name="keywords" content="estufa, monitoramento, controle">
+  	<meta name="author" content="Pedro Bertoni">
+    <title>GoGreen Solutions | Welcome</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}"/>
+  </head>
+  <body>
+    <header>
+      <div class="container">
+        <div id="branding">
+
+          <h1><span class="highlight">GoGreen Solutions</span></h1>
+        </div>
+        <nav>
+          <ul>
+            <li class="current"><a href="/">Início</a></li>
+            <li><a href='/about/'>Sobre</a></li>
+            <li><a href='/produto/'>Nosso Produto</a></li>
+			<li><a href="/contatos/">Contatos</a></li>
+			<li><a href="/cliente/">Área do cliente</a></li>
+          </ul>
+        </nav>
+      </div>
+    </header>
+
+
+
+<section id="showcase">
+      <div class="container">
+        <h1>Monitorando sua produção remotamente</h1>
+        <p>Monitore e tome as ações necessárias do seu cultivo, onde e quando quiser, de forma simples, rápida e inteligente.</p>
+      </div>
+    </section>
+
+    <section id="boxes">
+      <div class="container">
+        <div class="box">
+          <img src="{% static 'img/logo_monitora.png' %}"/>
+          <h3>Monitoramento</h3>
+          <p>Monitorando a estufa remotamente, o produtor pode diminuir seu tempo de deslocamento dentro das estufas, podendo focar em outros componentes de sua produção. </p>
+        </div>
+        <div class="box">
+            {% load static %}
+          <img src="{% static 'img/logo_analise.png' %}"/>
+          <h3>Análises</h3>
+          <p>Coleta dados em tempo real e os dispõem de maneira simples e de fácil visualização para o produtor rural</p>
+        </div>
+        <div class="box">
+          <img src="{% static 'img/logo_estufa.jpg' %}"/>
+          <h3>Comande sua estufa</h3>
+          <p>Altere as condições de sua estufa sem precisar sair de casa</p>
+        </div>
+      </div>
+    </section>
+
+    <footer>
+      <p>Gogreen Solutions, Copyright &copy; 2018</p>
+    </footer>
+  </body>
+</html>

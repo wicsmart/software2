@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+{% load static %}
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width">
+    <meta name="description" content="Monitoramento e Controle remoto de sua estufa">
+	  <meta name="keywords" content="estufa, monitoramento, controle">
+  	<meta name="author" content="Pedro Bertoni">
+    <title>GoGreen Solutions | Welcome</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}"/>
+
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+
+
+
+  </head>
+  <body>
+    <header>
+      <div class="container">
+        <div id="branding">
+			
+          <h1><span class="highlight">GoGreen Solutions</span></h1>
+        </div>
+        <nav>
+          <ul>
+            <li class="current"><a href="/">Início</a></li>
+            <li><a href='/about/'>Sobre</a></li>
+            <li><a href='/produto/'>Nosso Produto</a></li>
+			<li><a href="/contatos/">Contatos</a></li>
+			<li><a href="/cliente/">Área do cliente</a></li>
+          </ul>
+        </nav>
+      </div>
+    </header>
+{% block content %}
+    {% endblock %}
+
+<!--
+  -->
+
+    <footer>
+      <p>Gogreen Solutions, Copyright &copy; 2018</p>
+    </footer>
+  </body>
+</html>

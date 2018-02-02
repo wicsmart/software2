@@ -88,8 +88,12 @@ WSGI_APPLICATION = 'version2.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': 'gogreenv2',
+        'USER': 'wictor',
+        'PASSWORD': 'wictor15',
+        'HOST': 'localhost',
+        'PORT': '',
     }
 }
 
@@ -151,4 +155,5 @@ ALLOWED_HOSTS = ['*']
 #Heroku settings
 
 
-#django_heroku.settings(locals())
+
+SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')

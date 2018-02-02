@@ -151,11 +151,4 @@ ALLOWED_HOSTS = ['*']
 #Heroku settings
 
 
-
-DATABASES['default'] = dj_database_url.config()
-DATABASES['default']['CONN_MAX_AGE'] = 500
-DATABASES['default']['ENGINE'] = 'django.db.backends.sqlite3'
-
-
-
 #django_heroku.settings(locals())

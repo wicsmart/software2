@@ -42,14 +42,16 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'rest_framework',
     'polls.apps.PollsConfig',
+    'rest_framework.authtoken',
 ]
 
 REST_FRAMEWORK = {
     # Use Django's standard `django.contrib.auth` permissions,
     # or allow read-only access for unauthenticated users.
     'DEFAULT_PERMISSION_CLASSES': [
-        'rest_framework.permissions.DjangoModelPermissionsOrAnonReadOnly'
-    ]
+        'rest_framework.permissions.DjangoModelPermissionsOrAnonReadOnly',
+    ],
+    'DATETIME_FORMAT':"%Y-%m-%d %H:%M:%S",
 }
 
 MIDDLEWARE = [
@@ -87,6 +89,7 @@ WSGI_APPLICATION = 'version2.wsgi.application'
 # https://docs.djangoproject.com/en/2.0/ref/settings/#databases
 
 '''
+
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
@@ -102,7 +105,6 @@ DATABASES = {
 DATABASES = {
     'default': dj_database_url.config()
 }
-
 
 # Password validation
 # https://docs.djangoproject.com/en/2.0/ref/settings/#auth-password-validators

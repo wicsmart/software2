@@ -1,12 +1,20 @@
 from django.contrib.auth.models import User, Group
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render
-from django.http import HttpResponse
+from rest_framework.response import Response
 from rest_framework import viewsets
+from rest_framework.permissions import IsAuthenticated, IsAuthenticatedOrReadOnly, AllowAny
 from polls.serializers import *
 from polls.models import *
 from rest_framework import generics
 from django.views import View
+
+
+class IsAuthenticatedNotPost(IsAuthenticated):
+    def has_permission(self, request, view):
+        if request.method == 'POST':
+            return True
+        return super(IsAuthenticatedNotPost, self).has_permission(request, view)
 
 
 def home(request):
@@ -39,7 +47,12 @@ class GroupViewSet(viewsets.ModelViewSet):
     queryset = Group.objects.all()
     serializer_class = GroupSerializer
 
+
+
 class SenseInList(generics.ListCreateAPIView):
+
+    #permission_classes = (IsAuthenticatedNotPost,)
+    permission_classes = (AllowAny,)
 
     queryset = SenseIn.objects.all()
     serializer_class = SenseInSerializer
@@ -50,7 +63,25 @@ class SenseInDetail(generics.RetrieveUpdateDestroyAPIView):
     serializer_class = SenseInSerializer
 
 
+
+
+class SenseOutList(generics.ListCreateAPIView):
+
+   # permission_classes = (IsAuthenticatedNotPost,)
+    permission_classes = (AllowAny,)
+    queryset = SenseOut.objects.all()
+    serializer_class = SenseOutSerializer
+
+class SenseOutDetail(generics.RetrieveUpdateDestroyAPIView):
+    queryset = SenseOut.objects.all()
+    serializer_class = SenseOutSerializer
+
+
+
+
+
 class MensagemList(generics.ListCreateAPIView):
+    permission_classes = (IsAuthenticated)
     queryset = Mensagem.objects.all()
     serializer_class = MensagemSerializer
 

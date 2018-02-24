@@ -20,7 +20,14 @@ class MensagemSerializer(serializers.ModelSerializer):
         model = Mensagem
         fields = ('id', 'nome', 'email', 'mensagem', 'created', 'telefone')
 
+
 class SenseInSerializer(serializers.ModelSerializer):
     class Meta:
         model = SenseIn
+        fields = ('id', 'temperatura', 'umidade', 'luz', 'time')
+
+
+class SenseOutSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = SenseOut
         fields = ('id', 'temperatura', 'umidade', 'luz', 'time')

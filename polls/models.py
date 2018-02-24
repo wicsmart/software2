@@ -16,10 +16,10 @@ class Mensagem(models.Model):
 
 
 class SenseIn(models.Model):
-    time = models.DateTimeField('Time', blank=False)
-    umidade = models.IntegerField('Umidade', blank=False)
-    luz = models.IntegerField('Luz', blank=False)
     temperatura = models.FloatField('Temperatura', blank=False)
+    umidade = models.FloatField('Umidade', blank=False)
+    luz = models.IntegerField('Luz', blank=False)
+    time = models.DateTimeField('Time', blank=False)
 
     def __str__(self):
         return "Temperatura: " + str(self.temperatura) + " Umidade: " + str(self.umidade) + " Time: " + str(self.time)
@@ -28,10 +28,11 @@ class SenseIn(models.Model):
         ordering = ['time']
 
 class SenseOut(models.Model):
-    time = models.DateTimeField('Time', blank=False)
-    umidade = models.IntegerField('Umidade', blank=False)
-    luz = models.IntegerField('Luz', blank=False)
+
     temperatura = models.FloatField('Temperatura', blank=False)
+    umidade = models.FloatField('Umidade', blank=False)
+    luz = models.IntegerField('Luz', blank=False)
+    time = models.DateTimeField('Time', blank=False)
 
     def __str__(self):
         return "Temperatura: " + str(self.temperatura) + " Umidade: " + str(self.umidade) + " Time: " + str(self.time)

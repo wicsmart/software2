@@ -7,6 +7,10 @@ urlpatterns = [
 
     url(r'^sensein/$', SenseInList.as_view()),
     url(r'^sensein/(?P<pk>[0-9]+)/$', SenseInDetail.as_view()),
+
+    url(r'^senseout/$', SenseOutList.as_view()),
+    url(r'^senseout/(?P<pk>[0-9]+)/$', SenseOutDetail.as_view()),
+
     url(r'^mensagem/$', MensagemList.as_view()),
     url(r'^mensagem/(?P<pk>[0-9]+)/$', MensagemDetail.as_view()),
 ]

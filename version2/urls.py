@@ -15,6 +15,7 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.contrib.auth.views import LoginView
+from django.contrib.auth.views import login, logout
 from django.urls import path
 from django.conf.urls import url, include
 from polls import views
@@ -28,7 +29,10 @@ router.register(r'groups', views.GroupViewSet)
 urlpatterns = [
     url(r'^api-auth/', include('rest_framework.urls')),
     path('admin/', admin.site.urls),
-    url(r'^login/', LoginView.as_view(), name='login'),
+    url(r'^login/', LoginView.as_view(),  name='login'),
+
+    url(r'^dashboard/', include(router.urls)),
+
     url(r'^django/', include(router.urls)),
     url(r'^', include('polls.urls')),
     url(r'^about/', views.about),

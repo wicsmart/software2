@@ -75,8 +75,6 @@ $.ajax({
         .renderVerticalGridLines(true)
         .renderHorizontalGridLines(true);
 
-
-
         rangeChart2
         .height(40)
         .width(600)
@@ -113,6 +111,36 @@ $.ajax({
             .group(groupTemp);
 
       dc.renderAll();
+
+    function resetData(ndx, dimensions) {
+        var lineChartFilters = lineChart.filters();
+        var lineChart2Filters = lineChart2.filters();
+        lineChart.filters(null);
+        lineChart2.filters(null);
+        ndx.remove();
+        lineChart.filters([lineChartFilters])
+        lineChart2.filters([lineChart2Filters])
+    }
+
+
+    setInterval(function() {
+        console.log("data refresh");
+        $.ajax({
+            url: '/sensein/',
+            type: 'get',
+            dataType: 'json',
+            success: function (data) {
+                console.log(data);
+                sensein = data.map(function (d) {
+                    d.time = formata(d.time);
+                        return d;
+                    });
+                resetData(ndx, [dimension]);
+                ndx.add(sensein);
+                dc.redrawAll();
+            }
+        });
+        },5000);
     },
     failure: function(data) {
         alert('Got an error dude');

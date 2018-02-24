@@ -1,25 +1,4 @@
-
 var formata = d3.time.format("%Y-%m-%d %H:%M:%S").parse;
-/*
-      var data = [
-      {"id":1,"temperatura":22.4,"umidade":60.0,"luz":0,"time":"2018-02-12 12:50:14"},
-      {"id":5,"temperatura":22.0,"umidade":75.0,"luz":0,"time":"2018-02-13 15:57:24"},
-      {"id":6,"temperatura":32.0,"umidade":55.0,"luz":0,"time":"2018-02-14 16:17:14"},
-      {"id":7,"temperatura":12.0,"umidade":85.0,"luz":0,"time":"2018-02-15 16:17:48"},
-      {"id":8,"temperatura":42.0,"umidade":45.0,"luz":0,"time":"2018-02-16 16:19:33"},
-      {"id":9,"temperatura":22.0,"umidade":55.0,"luz":0,"time":"2018-02-17 16:20:07"},
-      {"id":11,"temperatura":33.5,"umidade":66.0,"luz":0,"time":"2018-02-18 16:36:00"},
-      {"id":12,"temperatura":23.5,"umidade":76.0,"luz":0,"time":"2018-02-19 16:40:19"},
-      {"id":13,"temperatura":43.5,"umidade":86.0,"luz":0,"time":"2018-02-20 16:40:36"},
-      {"id":14,"temperatura":15.5,"umidade":56.0,"luz":0,"time":"2018-02-21 16:53:55"},
-      {"id":15,"temperatura":45.5,"umidade":66.0,"luz":0,"time":"2018-02-22 16:55:07"}
-      ].map(function (d) {
-          d.time = formata(d.time);
-          return d;
-      });
-*/
-    var sensein, senseout;
-
 $.ajax({
     url: '/sensein/',
     type: 'get',
@@ -112,9 +91,12 @@ $.ajax({
 
       dc.renderAll();
 
-    function resetData(ndx, dimensions) {
+    function resetData(ndx, dimension) {
         var lineChartFilters = lineChart.filters();
+         console.log(lineChartFilters);
+
         var lineChart2Filters = lineChart2.filters();
+         console.log(lineChart2Filters);
         lineChart.filters(null);
         lineChart2.filters(null);
         ndx.remove();
@@ -135,12 +117,12 @@ $.ajax({
                     d.time = formata(d.time);
                         return d;
                     });
-                resetData(ndx, [dimension]);
+                resetData(ndx, dimension);
                 ndx.add(sensein);
                 dc.redrawAll();
             }
         });
-        },5000);
+        },10000);
     },
     failure: function(data) {
         alert('Got an error dude');

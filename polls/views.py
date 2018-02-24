@@ -8,6 +8,7 @@ from polls.serializers import *
 from polls.models import *
 from rest_framework import generics
 from django.views import View
+from django.http import JsonResponse
 
 
 class IsAuthenticatedNotPost(IsAuthenticated):
@@ -32,6 +33,13 @@ def contatos(request):
 
 def produto(request):
     return render(request, 'produto.html')
+
+def lastSenseIn(request):
+    sensein = SenseIn.objects.latest('time')
+    serializer = SenseInSerializer(sensein)
+    print('chegou aqui')
+    return JsonResponse(serializer.data)
+
 
 class UserViewSet(viewsets.ModelViewSet):
     """

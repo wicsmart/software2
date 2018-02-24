@@ -6,6 +6,7 @@ from polls.views import *
 urlpatterns = [
 
     url(r'^sensein/$', SenseInList.as_view()),
+    url(r'^lastsensein/$', lastSenseIn),
     url(r'^sensein/(?P<pk>[0-9]+)/$', SenseInDetail.as_view()),
 
     url(r'^senseout/$', SenseOutList.as_view()),
@@ -13,5 +14,7 @@ urlpatterns = [
 
     url(r'^mensagem/$', MensagemList.as_view()),
     url(r'^mensagem/(?P<pk>[0-9]+)/$', MensagemDetail.as_view()),
+
+
 ]
 urlpatterns = format_suffix_patterns(urlpatterns)

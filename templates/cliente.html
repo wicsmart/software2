@@ -46,7 +46,7 @@
       <div class="col-sm-6">
         <div class="chart-wrapper">
           <div class="chart-title">
-            <h2>Umidade</h2>
+            <h2>Temperatura</h2> <h2 id = 'temperatura'></h2>
           </div>
           <div class="chart-stage" id = 'lineChart'>
           </div>
@@ -57,6 +57,7 @@
         <div class="chart-wrapper">
           <div class="chart-title">
             <h2>Umidade </h2>
+            <h2 id = 'umidade'></h2>
           </div>
           <div class="chart-stage"  id = 'lineChart2'>
           </div>
@@ -149,6 +150,22 @@
   </div>
 
   <script type="text/javascript" src="{% static 'js/genChart.js' %}"></script>
+
+  <script type="text/javascript">
+     setInterval(function() {
+        console.log("data refresh");
+        $.ajax({
+            url: '/lastsensein/',
+            type: 'get',
+            dataType: 'json',
+            success: function (data) {
+                console.log(data);
+                $( "#temperatura" ).html( data.temperatura );
+                $( "#umidade" ).html( data.umidade );
+            }
+        });
+        },5000);
+  </script>
 
 </body>
 </html>

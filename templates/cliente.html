@@ -46,7 +46,9 @@
       <div class="col-sm-6">
         <div class="chart-wrapper">
           <div class="chart-title">
-            <h2>Temperatura</h2> <h2 id = 'temperatura'></h2>
+
+              <h2 style="float: center" id = 'temperatura'></h2>
+
           </div>
           <div class="chart-stage" id = 'lineChart'>
           </div>
@@ -56,8 +58,9 @@
       <div class="col-sm-6">
         <div class="chart-wrapper">
           <div class="chart-title">
-            <h2>Umidade </h2>
-            <h2 id = 'umidade'></h2>
+
+              <h2 style="float: center" id = 'umidade'></h2>
+
           </div>
           <div class="chart-stage"  id = 'lineChart2'>
           </div>
@@ -70,26 +73,29 @@
       <div class="col-sm-6">
         <div class="chart-wrapper">
           <div class="chart-title">
-            Cell Title
+
+           <h2 style="float: center" id = 'temperaturaOut'></h2>
 
           </div>
-          <div class="chart-stage"  id = 'chart-03'>
+          <div class="chart-stage" id = 'lineChartOut'>
           </div>
+          <div class="chart-stage" id="range-chartOut"></div>
         </div>
       </div>
       <div class="col-sm-6">
         <div class="chart-wrapper">
           <div class="chart-title">
-            Cell Title
-          </div>
-          <div class="chart-stage"  id = 'chart-04'>
-          </div>
 
+            <h2 style="float: center" id = 'umidadeOut'></h2>
+
+          </div>
+          <div class="chart-stage"  id = 'lineChartOut2'>
+          </div>
+         <div class="chart-stage" id="range-chartOut2"></div>
         </div>
       </div>
-
     </div>
-
+<!--
     <div class="row">
       <div class="col-sm-6 col-md-3">
         <div class="chart-wrapper">
@@ -143,6 +149,8 @@
         </div>
       </div>
     </div>
+  -->
+
   </div>
 
   <div class="container-fluid">
@@ -150,21 +158,49 @@
   </div>
 
   <script type="text/javascript" src="{% static 'js/genChart.js' %}"></script>
-
+  <script type="text/javascript" src="{% static 'js/genChartOut.js' %}"></script>
   <script type="text/javascript">
+  $.ajax({
+            url: '/lastsensein/',
+            type: 'get',
+            dataType: 'json',
+            success: function (data) {
+                $( "#temperatura" ).text( "Temperatura Estufa : " + data.temperatura );
+                $( "#umidade" ).text("Umidade Estufa : " + data.umidade );
+            }
+   });
+    $.ajax({
+            url: '/lastsenseout/',
+            type: 'get',
+            dataType: 'json',
+            success: function (data) {
+                $( "#temperaturaOut" ).text("Temperatura Externa : " + data.temperatura );
+                $( "#umidadeOut" ).text("Umidade Externa : " + data.umidade );
+            }
+   });
      setInterval(function() {
-        console.log("data refresh");
         $.ajax({
             url: '/lastsensein/',
             type: 'get',
             dataType: 'json',
             success: function (data) {
-                console.log(data);
-                $( "#temperatura" ).html( data.temperatura );
-                $( "#umidade" ).html( data.umidade );
+                $( "#temperatura" ).text( "Temperatura Estufa : " + data.temperatura );
+                $( "#umidade" ).text("Umidade Estufa : " + data.umidade );
             }
         });
-        },5000);
+
+        $.ajax({
+            url: '/lastsenseout/',
+            type: 'get',
+            dataType: 'json',
+            success: function (data) {
+               $( "#temperaturaOut" ).text( "Temperatura Externa : " + data.temperatura );
+                $( "#umidadeOut" ).html("Umidade Externa : " + data.umidade );
+            }
+        });
+
+        },10000);
+
   </script>
 
 </body>

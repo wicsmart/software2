@@ -37,9 +37,12 @@ def produto(request):
 def lastSenseIn(request):
     sensein = SenseIn.objects.latest('time')
     serializer = SenseInSerializer(sensein)
-    print('chegou aqui')
     return JsonResponse(serializer.data)
 
+def lastSenseOut(request):
+    senseout = SenseOut.objects.latest('time')
+    serializer = SenseInSerializer(senseout)
+    return JsonResponse(serializer.data)
 
 class UserViewSet(viewsets.ModelViewSet):
     """

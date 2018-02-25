@@ -1,16 +1,16 @@
 var formata = d3.time.format("%Y-%m-%d %H:%M:%S").parse;
 $.ajax({
-    url: '/sensein/',
+    url: '/senseout/',
     type: 'get',
     dataType: 'json',
     success: function (data) {
     console.log(data);
-    sensein = data.map(function (d) {
+    senseout = data.map(function (d) {
         d.time = formata(d.time);
             return d;
         });
 
-    domain = [ sensein[0].time, sensein.slice(-1)[0].time ];
+    domain = [ senseout[0].time, senseout.slice(-1)[0].time ];
 
     var ndx = crossfilter(data);
 
@@ -18,12 +18,10 @@ $.ajax({
       groupTemp = dimension.group().reduceSum(function(d) { return d.temperatura; });
       groupUmi = dimension.group().reduceSum(function(d) { return d.umidade; });
 
-      var lineChart = dc.lineChart("#lineChart");
-      var lineChart2 = dc.lineChart("#lineChart2");
-      var rangeChart = dc.lineChart('#range-chart')
-      var rangeChart2 = dc.lineChart('#range-chart2')
-
-      var pieChart = dc.pieChart("#pieChart");
+      var lineChart = dc.lineChart("#lineChartOut");
+      var lineChart2 = dc.lineChart("#lineChartOut2");
+      var rangeChart = dc.lineChart('#range-chartOut');
+      var rangeChart2 = dc.lineChart('#range-chartOut2');
 
       rangeChart
         .height(40)
@@ -83,39 +81,28 @@ $.ajax({
         .renderVerticalGridLines(true)
         .renderHorizontalGridLines(true);
 
-        pieChart
-            .width(200)
-            .height(100)
-            .dimension(dimension)
-            .group(groupTemp);
+        dc.renderAll();
 
-      dc.renderAll();
-
-        function resetDimensionFilter (dimension) {
-            dimension.filter(null);
-            ndx.remove();
-        }
     },
     failure: function(data) {
         alert('Got an error dude');
     }
     });
 
-
  setInterval(function() {
         console.log("data refresh");
         $.ajax({
-            url: '/sensein/',
+            url: '/senseout/',
             type: 'get',
             dataType: 'json',
             success: function (data) {
                 console.log(data);
-                sensein = data.map(function (d) {
+                senseout = data.map(function (d) {
                     d.time = formata(d.time);
                         return d;
                     });
 
-    domain = [ sensein[0].time, sensein.slice(-1)[0].time ];
+    domain = [ senseout[0].time, senseout.slice(-1)[0].time ];
 
     var ndx = crossfilter(data);
 
@@ -123,12 +110,11 @@ $.ajax({
       groupTemp = dimension.group().reduceSum(function(d) { return d.temperatura; });
       groupUmi = dimension.group().reduceSum(function(d) { return d.umidade; });
 
-      var lineChart = dc.lineChart("#lineChart");
-      var lineChart2 = dc.lineChart("#lineChart2");
-      var rangeChart = dc.lineChart('#range-chart')
-      var rangeChart2 = dc.lineChart('#range-chart2')
+     var lineChart = dc.lineChart("#lineChartOut");
+      var lineChart2 = dc.lineChart("#lineChartOut2");
+      var rangeChart = dc.lineChart('#range-chartOut');
+      var rangeChart2 = dc.lineChart('#range-chartOut2');
 
-      var pieChart = dc.pieChart("#pieChart");
 
       rangeChart
         .height(40)
@@ -188,13 +174,7 @@ $.ajax({
         .renderVerticalGridLines(true)
         .renderHorizontalGridLines(true);
 
-        pieChart
-            .width(200)
-            .height(100)
-            .dimension(dimension)
-            .group(groupTemp);
-
-      dc.renderAll();
+        dc.renderAll();
 
             }
         });

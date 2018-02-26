@@ -3,7 +3,7 @@
 <html>
 <head>
   <meta charset="utf-8">
-  <title>Layouts &raquo; Split-Columns</title>
+  <title>GreenHouse Tech</title>
   <meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no' />
   <link rel="stylesheet" type="text/css" href="{% static 'css/bootstrap.min.css' %}">
   <link rel="stylesheet" type="text/css" href="{% static 'css/dc.css' %}"/>
@@ -34,6 +34,7 @@
       <div class="navbar-collapse collapse">
         <ul class="nav navbar-nav navbar-left">
           <li><a href="/">Home</a></li>
+          <li><a href="https://gogreen.clicdata.com/v/JokqXTaDfOjK">DashBoard</a></li>
           <li><a href="/">Sair</a></li>
         </ul>
       </div>
@@ -165,8 +166,8 @@
             type: 'get',
             dataType: 'json',
             success: function (data) {
-                $( "#temperatura" ).text( "Temperatura Estufa : " + data.temperatura );
-                $( "#umidade" ).text("Umidade Estufa : " + data.umidade );
+                $( "#temperatura" ).text( "Temperatura Estufa : " + data.temperatura + " °" );
+                $( "#umidade" ).text("Umidade Estufa : " + data.umidade + " %" );
             }
    });
     $.ajax({
@@ -174,8 +175,8 @@
             type: 'get',
             dataType: 'json',
             success: function (data) {
-                $( "#temperaturaOut" ).text("Temperatura Externa : " + data.temperatura );
-                $( "#umidadeOut" ).text("Umidade Externa : " + data.umidade );
+                $( "#temperaturaOut" ).text("Temperatura Externa : " + data.temperatura + " °");
+                $( "#umidadeOut" ).text("Umidade Externa : " + data.umidade + " %");
             }
    });
      setInterval(function() {
@@ -184,8 +185,8 @@
             type: 'get',
             dataType: 'json',
             success: function (data) {
-                $( "#temperatura" ).text( "Temperatura Estufa : " + data.temperatura );
-                $( "#umidade" ).text("Umidade Estufa : " + data.umidade );
+                $( "#temperatura" ).text( "Temperatura Estufa : " + data.temperatura + " °");
+                $( "#umidade" ).text("Umidade Estufa : " + data.umidade + " %");
             }
         });
 
@@ -194,8 +195,8 @@
             type: 'get',
             dataType: 'json',
             success: function (data) {
-               $( "#temperaturaOut" ).text( "Temperatura Externa : " + data.temperatura );
-                $( "#umidadeOut" ).html("Umidade Externa : " + data.umidade );
+               $( "#temperaturaOut" ).text( "Temperatura Externa : " + data.temperatura + " °");
+                $( "#umidadeOut" ).html("Umidade Externa : " + data.umidade + " %" );
             }
         });
 

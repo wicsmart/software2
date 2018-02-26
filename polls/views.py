@@ -31,6 +31,9 @@ def cliente(request):
 def contatos(request):
     return render(request, 'contatos.html')
 
+def dashboardCliente(request):
+    return render(request, 'dashboard.html')
+
 def produto(request):
     return render(request, 'produto.html')
 

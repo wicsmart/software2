@@ -36,11 +36,7 @@ urlpatterns = [
     url(r'^django/', include(router.urls)),
     url(r'^', include('polls.urls')),
     url(r'^dashboardCliente/', views.dashboardCliente),
-    url(r'^about/', views.about),
     url(r'^cliente/', views.cliente),
-    url(r'^produto/', views.produto),
-    url(r'^contatos/', views.contatos),
-
 
     url(r'^', views.home),
 

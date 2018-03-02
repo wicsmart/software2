@@ -21,21 +21,12 @@ class IsAuthenticatedNotPost(IsAuthenticated):
 def home(request):
     return render(request, 'index.html', {'html_var':'holaaa'})
 
-def about(request):
-    return render(request, 'about.html')
-
 @login_required(login_url = '/login/')
 def cliente(request):
     return render(request, 'cliente.html')
 
-def contatos(request):
-    return render(request, 'contatos.html')
-
 def dashboardCliente(request):
     return render(request, 'dashboard.html')
-
-def produto(request):
-    return render(request, 'produto.html')
 
 def lastSenseIn(request):
     sensein = SenseIn.objects.latest('time')

@@ -89,7 +89,7 @@ WSGI_APPLICATION = 'version2.wsgi.application'
 # https://docs.djangoproject.com/en/2.0/ref/settings/#databases
 
 
-
+'''
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
@@ -105,7 +105,7 @@ DATABASES = {
 DATABASES = {
     'default': dj_database_url.config()
 }
-'''
+
 # Password validation
 # https://docs.djangoproject.com/en/2.0/ref/settings/#auth-password-validators
 

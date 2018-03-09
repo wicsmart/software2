@@ -1,4 +1,5 @@
 from django.db import models
+from paho.mqtt.publish import single
 
 
 class Mensagem(models.Model):
@@ -43,6 +44,23 @@ class SenseOut(models.Model):
 class Monitor(models.Model):
     upload = models.FileField(upload_to='media', null=True, blank=True)
     created = models.DateTimeField(blank=False)
+
+    class Meta:
+        ordering = ['created']
+
+
+
+class Acao(models.Model):
+    acao = models.TextField('Acao', blank=False)
+    created = models.DateTimeField('Criado', auto_now_add=True, blank=False)
+
+    class Meta:
+        ordering = ['created']
+
+
+class Status(models.Model):
+    status = models.FileField('Status', blank=True)
+    created = models.DateTimeField('Criado', auto_now_add=True, blank=False)
 
     class Meta:
         ordering = ['created']

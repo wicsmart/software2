@@ -1,7 +1,6 @@
 from django.contrib.auth.models import User, Group
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render
-from rest_framework.response import Response
 from rest_framework import viewsets
 from rest_framework.permissions import IsAuthenticated, IsAuthenticatedOrReadOnly, AllowAny
 from polls.serializers import *
@@ -9,6 +8,9 @@ from polls.models import *
 from rest_framework import generics
 from django.views import View
 from django.http import JsonResponse
+from django.db.models.signals import post_save
+from django.dispatch import receiver
+from polls.modules import writeSerial
 
 
 class IsAuthenticatedNotPost(IsAuthenticated):
@@ -52,7 +54,7 @@ class GroupViewSet(viewsets.ModelViewSet):
     queryset = Group.objects.all()
     serializer_class = GroupSerializer
 
-
+#*********** Medidas
 
 class SenseInList(generics.ListCreateAPIView):
 
@@ -68,8 +70,6 @@ class SenseInDetail(generics.RetrieveUpdateDestroyAPIView):
     serializer_class = SenseInSerializer
 
 
-
-
 class SenseOutList(generics.ListCreateAPIView):
 
    # permission_classes = (IsAuthenticatedNotPost,)
@@ -83,17 +83,39 @@ class SenseOutDetail(generics.RetrieveUpdateDestroyAPIView):
 
 
 
+#************* Ações/Status/Mensagens
 
 
-class MensagemList(generics.ListCreateAPIView):
+class Mensagem(generics.ListCreateAPIView):
     permission_classes = (IsAuthenticated)
     queryset = Mensagem.objects.all()
     serializer_class = MensagemSerializer
 
 
-class MensagemDetail(generics.RetrieveUpdateDestroyAPIView):
-    queryset = Mensagem.objects.all()
-    serializer_class = MensagemSerializer
+class Acao(generics.ListCreateAPIView):
+    permission_classes = (AllowAny,)
+
+    queryset = Acao.objects.all()
+    serializer_class = AcaoSerializer
+
+    def perform_create(self, serializer):
+        instance = serializer.save()
+        json = '{"acao": "' +str(instance.acao) + '"}'
+        print(json)
+        writeSerial.escrever_acao(json)
+
+
+class Status(generics.ListCreateAPIView):
+
+    queryset = Status.objects.all()
+    serializer_class = StatusSerializer
+
+    def perform_create(self, serializer):
+        instance = serializer.save()
+        json = '{"status": "' + str(instance.status) + '"}'
+        print(json)
+        writeSerial.escrever_acao(json)
+
 
 class ClienteView(View):
     def get(self, request, *args, **kwargs):

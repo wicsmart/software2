@@ -6,15 +6,16 @@ from polls.views import *
 urlpatterns = [
 
     url(r'^sensein/$', SenseInList.as_view()),
-    url(r'^lastsensein/$', lastSenseIn),
-    url(r'^lastsenseout/$', lastSenseOut),
     url(r'^sensein/(?P<pk>[0-9]+)/$', SenseInDetail.as_view()),
+    url(r'^lastsensein/$', lastSenseIn),
 
     url(r'^senseout/$', SenseOutList.as_view()),
     url(r'^senseout/(?P<pk>[0-9]+)/$', SenseOutDetail.as_view()),
+    url(r'^lastsenseout/$', lastSenseOut),
 
-    url(r'^mensagem/$', MensagemList.as_view()),
-    url(r'^mensagem/(?P<pk>[0-9]+)/$', MensagemDetail.as_view()),
+    url(r'^mensagem/$', Mensagem.as_view()),
+    url(r'^acao/$', Acao.as_view()),
+    url(r'^status/$', Status.as_view()),
 
 
 ]

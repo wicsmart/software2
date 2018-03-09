@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     'rest_framework',
     'polls.apps.PollsConfig',
     'rest_framework.authtoken',
+    'corsheaders',
 ]
 
 REST_FRAMEWORK = {
@@ -55,14 +56,25 @@ REST_FRAMEWORK = {
 }
 
 MIDDLEWARE = [
+    'corsheaders.middleware.CorsMiddleware',
+    'django.middleware.common.CommonMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
-    'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
+
+CORS_ORIGIN_ALLOW_ALL = True
+CORS_ALLOW_CREDENTIALS = True
+CORS_ORIGIN_WHITELIST = (
+    'localhost:8000',
+)
+CORS_ORIGIN_REGEX_WHITELIST = (
+    'localhost:8000',
+)
+
 
 ROOT_URLCONF = 'version2.urls'
 LOGIN_URL = '/login/'
@@ -89,7 +101,7 @@ WSGI_APPLICATION = 'version2.wsgi.application'
 # https://docs.djangoproject.com/en/2.0/ref/settings/#databases
 
 
-'''
+
 
 DATABASES = {
     'default': {
@@ -101,11 +113,12 @@ DATABASES = {
         'PORT': '',
     }
 }
-'''
 
+'''
 DATABASES = {
     'default': dj_database_url.config()
 }
+'''
 # Password validation
 # https://docs.djangoproject.com/en/2.0/ref/settings/#auth-password-validators
 

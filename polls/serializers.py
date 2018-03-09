@@ -31,3 +31,13 @@ class SenseOutSerializer(serializers.ModelSerializer):
     class Meta:
         model = SenseOut
         fields = ('id', 'temperatura', 'umidade', 'luz', 'time')
+
+class AcaoSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Acao
+        fields = ('id', 'acao', 'created')
+
+class StatusSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Status
+        fields = ('id', 'status', 'created')

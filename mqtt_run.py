@@ -27,16 +27,15 @@ def save(client, userdata, msg):
     else:
         print(a.errors)
 
-def on_connect(a, b, c, d):
+def on_connect(client, userdata, rc, result):
     print('conectei')
 #   client.publish(topic='acao', qos=2, payload='ligar', retain=False)
     client.subscribe(topic='acao', qos=2)
     client.message_callback_add(sub='acao', callback=save)
 
 
-def on_disconnect(a, b, c, d):
-    print("desconectou")
-
+def on_disconnect(client, userdata, rc, result):
+    print('disconnected...rc=' + str(rc))
 
 from django.contrib.auth.models import User
 from django.db.models.signals import post_save

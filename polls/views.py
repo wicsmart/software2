@@ -97,25 +97,25 @@ class Acao(generics.ListCreateAPIView):
 
     queryset = Acao.objects.all()
     serializer_class = AcaoSerializer
-
+'''
     def perform_create(self, serializer):
         instance = serializer.save()
         json = '{"acao": "' +str(instance.acao) + '"}'
         print(json)
         writeSerial.escrever_acao(json)
-
+'''
 
 class Status(generics.ListCreateAPIView):
 
     queryset = Status.objects.all()
     serializer_class = StatusSerializer
-
+'''
     def perform_create(self, serializer):
         instance = serializer.save()
         json = '{"status": "' + str(instance.status) + '"}'
         print(json)
         writeSerial.escrever_acao(json)
-
+'''
 
 class ClienteView(View):
     def get(self, request, *args, **kwargs):

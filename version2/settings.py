@@ -26,7 +26,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = 'gy)@kjz4l*(7@+=!q=*sc41@h*i=9pp+&liyhqbrw2-2zp9$ym'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = []
 
@@ -101,7 +101,7 @@ WSGI_APPLICATION = 'version2.wsgi.application'
 # https://docs.djangoproject.com/en/2.0/ref/settings/#databases
 
 
-
+'''
 
 DATABASES = {
     'default': {
@@ -118,7 +118,7 @@ DATABASES = {
 DATABASES = {
     'default': dj_database_url.config()
 }
-'''
+
 # Password validation
 # https://docs.djangoproject.com/en/2.0/ref/settings/#auth-password-validators
 

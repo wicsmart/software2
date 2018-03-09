@@ -8,16 +8,16 @@ from paho.mqtt.publish import single
 os.environ["DJANGO_SETTINGS_MODULE"] = 'version2.settings'
 django.setup()
 
-from polls.serializers import AcaoSerializer
+from polls.serializers import AcaoSerializer, StatusSerializer
 
-from polls.models import Acao
+from polls.models import Acao, Status
 import paho.mqtt.client as mqtt
 from paho.mqtt.client import MQTTv311
 
 client = mqtt.Client(client_id='ServerDjango', clean_session=True, userdata=None,
                      protocol=MQTTv311, transport="tcp")
 
-def save(client, userdata, msg):
+def save_acao(client, userdata, msg):
     my_json = msg.payload.decode()
     payload = json.loads(my_json)
     print(payload)
@@ -28,11 +28,25 @@ def save(client, userdata, msg):
     else:
         print(a.errors)
 
+def save_status(client, userdata, msg):
+    my_json = msg.payload.decode()
+    payload = json.loads(my_json)
+    print(payload)
+    s = StatusSerializer(data=payload)
+    if s.is_valid():
+        s.save()
+        print('salvou no heroku')
+    else:
+        print(s.errors)
+
 def on_connect(client, userdata, rc, result):
     print('Conectado ao Broker')
 #   client.publish(topic='acao', qos=2, payload='ligar', retain=False)
     client.subscribe(topic='acao', qos=2)
-    client.message_callback_add(sub='acao', callback=save)
+    client.message_callback_add(sub='acao', callback=save_acao)
+    client.subscribe(topic='status', qos=2)
+    client.message_callback_add(sub='status', callback=save_status)
+
 
 
 def on_disconnect(client, userdata, rc, result):
@@ -43,11 +57,10 @@ from django.db.models.signals import post_save
 from django.dispatch import receiver
 
 
-@receiver(post_save, sender=Acao)
+@receiver(post_save, sender=Status)
 def save_profile(sender, instance, **kwargs):
     print('post_save executado no heroku')
-    publish.single(topic='atualizaWeb', qos=0, payload=instance.acao, hostname='165.227.28.137', port=1883)
-
+    publish.single(topic='status/refresh', qos=0, payload=instance.acao, hostname='165.227.28.137', port=1883)
 
 
 client.on_connect = on_connect

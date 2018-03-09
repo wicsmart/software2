@@ -10,7 +10,8 @@ topicStatus = 'staus'
 
 def escrever_acao(msg):
     print('Aqui escrevo na serial : ' + msg)
-    enviar_acao_to_heroku(msg)
+    payload = '{"acao" : "' + msg + '"}'
+    enviar_acao_to_heroku(payload)
 
 
 def enviar_status_to_heroku(msg):

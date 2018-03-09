@@ -20,6 +20,7 @@ client = mqtt.Client(client_id='ServerDjango', clean_session=True, userdata=None
 def save(client, userdata, msg):
     my_json = msg.payload.decode()
     payload = json.loads(my_json)
+    print(payload)
     a = AcaoSerializer(data=payload)
     if a.is_valid():
         a.save()
@@ -28,7 +29,7 @@ def save(client, userdata, msg):
         print(a.errors)
 
 def on_connect(client, userdata, rc, result):
-    print('conectei')
+    print('Conectado ao Broker')
 #   client.publish(topic='acao', qos=2, payload='ligar', retain=False)
     client.subscribe(topic='acao', qos=2)
     client.message_callback_add(sub='acao', callback=save)

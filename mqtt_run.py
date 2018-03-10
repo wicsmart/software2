@@ -60,8 +60,7 @@ from django.dispatch import receiver
 @receiver(post_save, sender=Status)
 def save_profile(sender, instance, **kwargs):
     print('post_save executado no heroku')
-    publish.single(topic='status/refresh', qos=0, payload=instance.acao, hostname='165.227.28.137', port=1883)
-
+    #publish.single(topic='status/refresh', qos=0, payload=instance.status, hostname='localhost', port=8000)
 
 client.on_connect = on_connect
 client.on_disconnect = on_disconnect

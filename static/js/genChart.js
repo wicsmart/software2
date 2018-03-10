@@ -15,11 +15,76 @@ function getSenseIn(){
                 timestamp = convertToTimestamp(data[i].time);
                 temperaturaIn.push([timestamp, data[i].temperatura]);
                 umidadeIn.push([timestamp, data[i].umidade]);
-                grafico(temperaturaIn, umidadeIn, 'interno',  'TEMPERATUTA E UMIDADE INTERNA');
               }
+
+    Highcharts.stockChart('temperatura_interna', {
+         /*   title: {
+                  text: name
+                  },*/
+
+          series:[{
+            name: 'temperatura',
+            data: temperaturaIn,
+            tooltip: {
+                valueDecimals: 1,
+                valueSuffix: '°C'
+            }
+          }],
+                chart: {
+                events: {
+                    load: function () {
+                    //set up the updating of the chart each second
+                     var t = this;
+                    var series = this.series;
+                    var length = series.length;
+                        setInterval(function () {
+                            $.ajax({
+                                url: '/lastsensein/',
+                                type: 'get',
+                                dataType: 'json',
+                                success: function (data) {
+                                    temperatura = new Array();
+                                    timestamp = convertToTimestamp(data.time);
+                                    temperatura.push([timestamp, data.temperatura]);
+                                    series[0].addPoint([timestamp, temperatura], true, true);
+
+                                }
+                            })
+                        },10000);
+                    }
+                }
+            },
+
+            rangeSelector: {
+              buttons: [{
+                  count: 3,
+                  type: 'day',
+                  text: '3D'
+              },{
+                  count: 1,
+                  type: 'week',
+                  text: '1S'
+              }, {
+                  count: 1,
+                  type: 'month',
+                  text: '1M'
+              }, {
+                  type: 'all',
+                  text: 'all'
+              }],
+              selected: 1
+          },
+           yAxis: {
+            title: {
+                text: 'Temperature (°C)'
+            }
+        }
+    });
+
           }
         });
 }
+
 function getSenseInLast(){
     $.ajax({
         url: '/lastsensein/',
@@ -29,7 +94,6 @@ function getSenseInLast(){
             timestamp = convertToTimestamp(data.time);
             temperatura.push([timestamp, data.temperatura]);
             umidade.push([timestamp, data.umidade]);
-
             }
         })
     };
@@ -44,7 +108,6 @@ function getSenseOutLast(){
             timestamp = convertToTimestamp(data.time);
             temperatura.push([timestamp, data.temperatura]);
             umidadeOut.push([timestamp, data.umidade]);
-
           }
       })
     };
@@ -62,11 +125,74 @@ function getSenseOut(){
                 timestamp = convertToTimestamp(data[i].time);
                 temperaturaOut.push([timestamp, data[i].temperatura]);
                 umidadeOut.push([timestamp, data[i].umidade]);
-                grafico(temperaturaOut, umidadeOut, 'externo', 'TEMPERATURA E UMIDADE EXTERNA');
             }
+
+             Highcharts.stockChart('temperatura_externa', {
+         /*   title: {
+                  text: name
+                  },*/
+          series:[{
+            name: 'temperatura',
+            data: temperaturaOut,
+            tooltip: {
+                valueDecimals: 1,
+                valueSuffix: '°C'
+            }
+          }],
+                chart: {
+                events: {
+                    load: function () {
+                    //set up the updating of the chart each second
+                     var t = this;
+                    var series = this.series[0];
+                    var length = series.length;
+                        setInterval(function () {
+                            $.ajax({
+                                url: '/lastsensout/',
+                                type: 'get',
+                                dataType: 'json',
+                                success: function (data) {
+                                    timestamp = convertToTimestamp(data.time);
+                                    temperatura = (data.temperatura);
+                                    series.addPoint([timestamp, temperatura], true, true);
+
+                                }
+                            })
+                        },10000);
+                    }
+                }
+            },
+
+            rangeSelector: {
+              buttons: [{
+                  count: 3,
+                  type: 'day',
+                  text: '3D'
+              },{
+                  count: 1,
+                  type: 'week',
+                  text: '1S'
+              }, {
+                  count: 1,
+                  type: 'month',
+                  text: '1M'
+              }, {
+                  type: 'all',
+                  text: 'all'
+              }],
+              selected: 1
+          },
+           yAxis: {
+            title: {
+                text: 'Temperature (°C)'
+            }
+        }
+    });
+
       }
     });
 }
+
 
 
 function grafico(serie1,serie2, local, name){
@@ -87,15 +213,31 @@ function grafico(serie1,serie2, local, name){
                 valueDecimals: 1,
                 valueSuffix: '°C'
             }
-          },{
-            name: 'Umidade',
-            data: serie2,
-            tooltip: {
-                valueDecimals: 1,
-                valueSuffix: '%'
-            }
           }],
+                chart: {
+                events: {
+                    load: function () {
+                    //set up the updating of the chart each second
+                        var t = this;
+            var series = this.series;
+            var length = series.length;
+                        setInterval(function () {
+                            $.ajax({
+                                url: url,
+                                type: 'get',
+                                dataType: 'json',
+                                success: function (data) {
+                                    temperatura = new Array();
+                                    timestamp = convertToTimestamp(data.time);
+                                    temperatura.push([timestamp, data.temperatura]);
+                                    series[0].addPoint([timestamp, temperatura], true, true);
 
+                                }
+                            })
+                        },10000);
+                    }
+                }
+            },
 
             rangeSelector: {
               buttons: [{
@@ -123,7 +265,6 @@ function grafico(serie1,serie2, local, name){
         }
     });
   }
-
 
 function convertToTimestamp(time){
           dateTimeParts = time.split(' ');

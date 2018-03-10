@@ -51,7 +51,7 @@ class Acao(models.Model):
 
 
 class Status(models.Model):
-    status = models.FileField('Status', blank=True)
+    status = models.TextField('Status', blank=True)
     created = models.DateTimeField('Criado', auto_now_add=True, blank=False)
 
     class Meta:

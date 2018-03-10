@@ -1,7 +1,7 @@
 from django.contrib import admin
 
 # Register your models here.
-from .models import SenseIn, SenseOut, Mensagem, Acao, Status, Monitor
+from .models import SenseIn, SenseOut, Mensagem, Acao, Status
 
 
 class MensagemAdmin (admin.ModelAdmin):

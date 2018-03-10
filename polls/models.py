@@ -41,14 +41,6 @@ class SenseOut(models.Model):
     class Meta:
         ordering = ['time']
 
-class Monitor(models.Model):
-    upload = models.FileField(upload_to='media', null=True, blank=True)
-    created = models.DateTimeField(blank=False)
-
-    class Meta:
-        ordering = ['created']
-
-
 
 class Acao(models.Model):
     acao = models.TextField('Acao', blank=False)

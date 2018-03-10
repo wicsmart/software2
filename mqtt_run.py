@@ -24,7 +24,7 @@ def save_acao(client, userdata, msg):
     a = AcaoSerializer(data=payload)
     if a.is_valid():
         a.save()
-        print('salvou no heroku')
+        print('salvou acao no heroku')
     else:
         print(a.errors)
 
@@ -35,7 +35,7 @@ def save_status(client, userdata, msg):
     s = StatusSerializer(data=payload)
     if s.is_valid():
         s.save()
-        print('salvou no heroku')
+        print('salvou status no heroku')
     else:
         print(s.errors)
 
